@@ -1,0 +1,32 @@
+.book-card {
+    background-color: #D9DBF1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+    margin: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .book-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .book-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .book-author {
+    color: #777;
+    font-size: 14px;
+  }
+  
+  .book-release {
+    color: #555;
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  

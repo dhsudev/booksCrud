@@ -1,0 +1,8 @@
+.book-grid {
+  background-color: #8E9DCC;
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));  /* Crear columnas de tamaño mínimo 220px */
+    gap: 20px;  /* Espacio entre las tarjetas */
+    padding: 20px;
+  }
