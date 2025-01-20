@@ -1,6 +1,6 @@
 //import "./App.js"
 import { auth, googleProvider } from "../config/firebase";
-import { info, success, error, debug } from "../utils/logger";
+import { info, success, error } from "../utils/logger";
 import { createUserWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
 import { useState } from 'react';
 
