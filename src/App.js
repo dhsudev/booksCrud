@@ -8,18 +8,18 @@ import useBooks from './hooks/useBooks';
 
 function App() {
 
-  const { books, loading } = useBooks(); // Call the hook here
+  const { books, loading, deleteBook, addBook } = useBooks(); // Call the hook here
 
 
   return (
     <div className="App">
       <Auth />
-      <AddBookForm />
+      <AddBookForm addBook={addBook}/>
       <div>
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <BookGrid books={books} /> // Pass the books array to BookGrid
+          <BookGrid books={books} deleteBook={deleteBook} /> 
         )}
       </div>
     </div>

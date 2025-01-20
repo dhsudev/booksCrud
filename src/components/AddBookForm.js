@@ -1,65 +1,63 @@
 import { useState } from "react";
-import { bookCollectionRef } from "../config/firebase";
-import { addDoc } from "firebase/firestore";
-import { getBooks } from "../services/booksService";
-import { info, error } from "../utils/logger";
+import './css/Form.css'
+import { IoCreate } from "react-icons/io5";
 
-
-function AddBookForm() {
+function AddBookForm({addBook}) {
     const [bookTitle, setBookTitle] = useState("");
     const [bookAuthor, setBookAuthor] = useState("");
     const [bookReleaseYear, setBookReleaseYear] = useState(0);
     const [bookReleaseMonth, setBookReleaseMonth] = useState("");
 
-    
-
     const monthAbbreviations = [
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
     ];
-    const addBook = async () => {
-        // add to db
-        try {
-            info("Trying to add book to database...");
-            await addDoc(bookCollectionRef, {
-                title: bookTitle,
-                author: bookAuthor,
-                releaseYear: bookReleaseYear,
-                releaseMonth: bookReleaseMonth
-            });
-        } catch (err) {
-            error("Error while adding book to database:");
-            console.log(err);
-        }
-        getBooks();
-    }
+    
     const handleDateChange = (e) => {
         const monthValue = e.target.value;
         const month = monthAbbreviations[Number(monthValue.split('-')[1])];
         const year = monthValue.split('-')[0];
         setBookReleaseMonth(month);
         setBookReleaseYear(Number(year));
-        console.log('Selected month:', bookReleaseMonth); // For debugging or further use
-        console.log('Selected year:', bookReleaseYear); // For debugging or further use
-
     };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newBook = {
+          title: bookTitle,
+          author: bookAuthor,
+          releaseYear: bookReleaseYear,
+          releaseMonth: bookReleaseMonth,
+        };
+        addBook(newBook);
+        setBookTitle('');
+        setBookAuthor('');
+        setBookReleaseYear('');
+        setBookReleaseMonth('');
+      };
+
     return (
-    <div id="AddBook">
+    <form id="add-book-form" className="form" onSubmit={handleSubmit}>
+        <h2>Insert a new book</h2>
+        <label>Name of the book</label>
         <input
             placeholder='Book title...'
             onChange={(e) => setBookTitle(e.target.value)}
+            required
         />
+        <label>Author of the book</label>
         <input
             placeholder='Author name...'
             onChange={(e) => setBookAuthor(e.target.value)}
+            required
         />
-        {/*  <input placeholder='Release year...' type='number'></input> */}
+        <label>Release date</label>
         <input
             placeholder='Release date...' type='month'
             onChange={handleDateChange}
         />
-        <button onClick={addBook}>Submit!</button>
-    </div>
+        <button className="submit-btn" type="submit"><IoCreate/> Save Book </button>
+    </form>
     );
 }
 
