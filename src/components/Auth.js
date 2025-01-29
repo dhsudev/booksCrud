@@ -2,7 +2,17 @@
 import { auth, googleProvider } from "../config/firebase";
 import { info, success, error } from "../utils/logger";
 import { createUserWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth'
-import { useState } from 'react';
+import React, { useState } from 'react';
+import './css/Form.css'
+
+const AuthButton = React.memo(({ onClick, disabled, children }) => {
+    console.log(`${children} re-rendered`);
+    return (
+        <button className="submit-btn" onClick={onClick} disabled={disabled}>
+            {children}
+        </button>
+    );
+});
 
 function Auth() {
     const [email, setEmail] = useState("");
