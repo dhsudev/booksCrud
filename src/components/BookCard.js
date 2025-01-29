@@ -1,10 +1,10 @@
 import React from 'react';
-import './css/BookCard.css';  // Aquí importamos el CSS del componente
+import './css/BookCard.css';
 import { FaTrash } from 'react-icons/fa';
 
 function BookCard({ id, title, author, releaseYear, releaseMonth, deleteBook }) {
   return (
-    <div className="book-card">
+    <div id={id} className="book-card" onClick={() => console.log(id + " clicked")}>
       <h3 className="book-title">{title}</h3>
       <p className="book-author">Author: {author}</p>
       <p className="book-release">
@@ -12,7 +12,7 @@ function BookCard({ id, title, author, releaseYear, releaseMonth, deleteBook }) 
       </p>
       <button
         className="delete-btn"
-        onClick={() => deleteBook(id)} // Call the delete function with the book ID
+        onClick={() => deleteBook(id)} 
       >
         <FaTrash />
       </button>

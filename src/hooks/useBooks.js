@@ -21,17 +21,17 @@ const useBooks = () => {
     }
   };
   const addBook = async (newBook) => {
-    //setLoading(true);
+    setLoading(true);
     try {
       info("Trying to add book to database...");
       console.log(newBook)
       await addDoc(bookCollectionRef, newBook);
       success("Added book suscessfuly")
-      setBooks((prevBooks) => [...prevBooks, newBook]);
     } catch (err) {
       error("Error while adding book to database:");
       console.log(err);
     } finally {
+      fetchBooks();
       setLoading(false)
     }
   }
@@ -42,10 +42,10 @@ const useBooks = () => {
         id = 
       console.log(id);
       await deleteDoc(doc(db, 'books', id)); // Firebase delete logic
-      setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id)); // Optimistic update
     } catch (err) {
       console.error('Failed to delete book:', err);
     } finally {
+      fetchBooks();
       setLoading(false)
     }
   };
