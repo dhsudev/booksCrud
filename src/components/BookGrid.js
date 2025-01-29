@@ -7,9 +7,10 @@ function BookGrid({ books, deleteBook }) {
   return (
     <div className="book-grid">
       {books.map((book, index) => {
-        console.log(book); // Verifica qué datos se pasan a cada tarjeta
+        //console.log(book);
         return (
           <BookCard
+            key={book.id}
             id={book.id}
             title={book.title}
             author={book.author}
